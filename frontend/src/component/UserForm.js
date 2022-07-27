@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import UserForm from "./UserForm";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
-const UserTable = () => {
+const UserForm = () => {
   const [country, setCountry] = useState([
     "Afghanistan",
     "Albania",
@@ -204,40 +204,112 @@ const UserTable = () => {
   const [gender, setGender] = useState(["Male", "Female"]);
   const [device, setDevice] = useState(["Desktop", "Mobile", "Tablet"]);
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (user) => {
+    console.log(user);
+    fetch("http://localhost:8080/user", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    reset();
+  };
+
   return (
-    <>
-      <div>
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-medium">
-            Top 10 user by usage time (Hour)
-          </h2>
-        </div>
+    <div>
+      <div className="mt-10 bg-gray-200 rounded-2xl p-8">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          action=""
+          className="grid grid-cols-3 gap-x-4"
+        >
+          <div class="form-control w-full ">
+            <label class="label">
+              <span class="label-text">Your Name</span>
+            </label>
+            <input
+              type="text"
+              {...register("fullName", { required: true })}
+              placeholder="Type here"
+              class="input input-bordered w-full "
+            />
+          </div>
+          <div class="form-control w-full ">
+            <label class="label">
+              <span class="label-text">Your Email</span>
+            </label>
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Type here"
+              class="input input-bordered w-full "
+            />
+          </div>
+          <div class="form-control w-full ">
+            <label class="label">
+              <span class="label-text">Select Country</span>
+            </label>
+            <select
+              class="select select-bordered"
+              {...register("country", { required: true })}
+            >
+              <option disabled>Pick one</option>
+              {country.map((c) => (
+                <option>{c}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-control w-full ">
+            <label class="label">
+              <span class="label-text">Select Gender</span>
+            </label>
+            <select
+              class="select select-bordered"
+              {...register("gender", { required: true })}
+            >
+              <option disabled>Pick one</option>
+              {gender.map((g) => (
+                <option>{g}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-control w-full ">
+            <label class="label">
+              <span class="label-text">Select Device</span>
+            </label>
+            <select
+              class="select select-bordered"
+              {...register("device", { required: true })}
+            >
+              <option disabled>Pick one</option>
+              {device.map((d) => (
+                <option>{d}</option>
+              ))}
+            </select>
+          </div>
+          <button type="submit" className="btn mt-auto">
+            Add New User
+          </button>
+        </form>
       </div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Country</th>
-              <th>Gender</th>
-              <th>Usage Time (Hour)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Bangladesh</td>
-              <td>Male</td>
-              <td>1212</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <UserForm />
-    </>
+    </div>
   );
 };
 
-export default UserTable;
+export default UserForm;

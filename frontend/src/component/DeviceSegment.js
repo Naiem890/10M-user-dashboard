@@ -38,7 +38,7 @@ const DeviceSegment = () => {
   };
   return (
     <>
-      <h2 className="text-2xl mb-4">User Count By DeviceType</h2>
+      <h2 className="text-2xl font-medium mb-4">User Count By DeviceType</h2>
       <Bar data={data}></Bar>
     </>
   );

@@ -2,7 +2,16 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 const mongoose = require("mongoose");
-const User = require("./Model/userModel");
+const {
+  User,
+  GenderCount,
+  CountryCount,
+  DeviceCount,
+  UserRank,
+} = require("./Model/userModel");
+const cors = require("cors");
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World! working mannn!!!");
@@ -28,16 +37,21 @@ const rebuild = async () => {
     await User.aggregate([
       { $sortByCount: "$country" },
       { $limit: 10 },
-      { $out: "countryCount" },
+      { $out: "countrycounts" },
     ]);
 
     await User.aggregate([
       { $sortByCount: "$device" },
-      { $out: "deviceCount" },
+      { $out: "devicecounts" },
     ]);
     await User.aggregate([
       { $sortByCount: "$gender" },
-      { $out: "genderCount" },
+      { $out: "gendercounts" },
+    ]);
+    await User.aggregate([
+      { $sort: { totalActiveHour: -1 } },
+      { $limit: 10 },
+      { $out: "userranks" },
     ]);
 
     console.log("aggregation successful");
@@ -47,9 +61,26 @@ const rebuild = async () => {
 };
 
 app.get("/report", async (req, res) => {
-  await rebuild();
+  const gender = await GenderCount.find({});
+  const country = await CountryCount.find({});
+  const device = await DeviceCount.find({});
+  const user = await UserRank.find({});
+  const report = { gender, country, device, user };
+  res.send(report);
+});
 
-  res.send("hellooo");
+app.post("/user", async (req, res) => {
+  console.log(req.body);
+  const response = {};
+
+  await User.create(req.body, function (err, docs) {
+    if (err) {
+      response.error = { err };
+    }
+    response.message = { docs };
+  });
+  await rebuild();
+  res.send(response);
 });
 
 app.listen(port, () => {

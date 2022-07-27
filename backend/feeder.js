@@ -15,7 +15,9 @@ while (i--) {
     gender: faker.name.gender(true),
     device: deviceArray[Math.floor(Math.random() * (3 - 0))],
     lastActive: faker.date.recent(30),
-    totalActiveHour: Math.floor(Math.random() * (10000 - 0)) + 0,
+    totalActiveHour:
+      Math.floor(Math.random() * (10000 - 0)) +
+      Math.floor(Math.random() * (10000 - 0)),
   };
   users.push(user);
 }

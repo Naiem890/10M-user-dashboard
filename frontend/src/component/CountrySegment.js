@@ -46,7 +46,7 @@ const CountrySegment = () => {
   };
   return (
     <>
-      <h2 className="text-2xl mb-4">Top 5 Country By User Count</h2>
+      <h2 className="text-2xl font-medium mb-4">Top 5 Country By User Count</h2>
       <Bar data={data}></Bar>
     </>
   );
