@@ -1,10 +1,10 @@
 import "./App.css";
+import Dashboard from "./component/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      this is keyword so I found no problem right? yesss working now and now???
-      also now? good best wow working mannnn
+      <Dashboard />
     </div>
   );
 }
