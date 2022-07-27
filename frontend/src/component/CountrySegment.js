@@ -1,38 +1,13 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-const CountrySegment = () => {
-  const countryData = [
-    {
-      country: "Bangladesh",
-      userCount: 346,
-    },
-    {
-      country: "UK",
-      userCount: 456,
-    },
-    {
-      country: "England",
-      userCount: 346,
-    },
-    {
-      country: "Canada",
-      userCount: 3455,
-    },
-    {
-      country: "Spain",
-      userCount: 2314,
-    },
-  ];
-
-  countryData.sort((a, b) => b.userCount - a.userCount);
-
+const CountrySegment = ({ countrySegment }) => {
   const data = {
-    labels: countryData.map((country) => country.country),
+    labels: countrySegment.map((country) => country._id),
     datasets: [
       {
         label: "User Count ",
-        data: countryData.map((country) => country.userCount),
+        data: countrySegment.map((country) => country.count),
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
           "rgba(54, 162, 235, 0.5)",

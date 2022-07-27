@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-const UserForm = () => {
-  const [country, setCountry] = useState([
+const UserForm = ({ getReport }) => {
+  const [country] = useState([
     "Afghanistan",
     "Albania",
     "Algeria",
@@ -201,16 +202,10 @@ const UserForm = () => {
     "Zimbabwe",
   ]);
 
-  const [gender, setGender] = useState(["Male", "Female"]);
-  const [device, setDevice] = useState(["Desktop", "Mobile", "Tablet"]);
+  const [gender] = useState(["Male", "Female"]);
+  const [device] = useState(["Desktop", "Mobile", "Tablet"]);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (user) => {
     console.log(user);
@@ -223,6 +218,8 @@ const UserForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        getReport();
+        toast.success("User Added Successfully");
         console.log("Success:", data);
       })
       .catch((error) => {
@@ -239,67 +236,67 @@ const UserForm = () => {
           action=""
           className="grid grid-cols-3 gap-x-4"
         >
-          <div class="form-control w-full ">
-            <label class="label">
-              <span class="label-text">Your Name</span>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Your Name</span>
             </label>
             <input
               type="text"
               {...register("fullName", { required: true })}
               placeholder="Type here"
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
           </div>
-          <div class="form-control w-full ">
-            <label class="label">
-              <span class="label-text">Your Email</span>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Your Email</span>
             </label>
             <input
               type="email"
               {...register("email", { required: true })}
               placeholder="Type here"
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
           </div>
-          <div class="form-control w-full ">
-            <label class="label">
-              <span class="label-text">Select Country</span>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Select Country</span>
             </label>
             <select
-              class="select select-bordered"
+              className="select select-bordered"
               {...register("country", { required: true })}
             >
               <option disabled>Pick one</option>
-              {country.map((c) => (
-                <option>{c}</option>
+              {country.map((c, i) => (
+                <option key={i}>{c}</option>
               ))}
             </select>
           </div>
-          <div class="form-control w-full ">
-            <label class="label">
-              <span class="label-text">Select Gender</span>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Select Gender</span>
             </label>
             <select
-              class="select select-bordered"
+              className="select select-bordered"
               {...register("gender", { required: true })}
             >
               <option disabled>Pick one</option>
-              {gender.map((g) => (
-                <option>{g}</option>
+              {gender.map((g, i) => (
+                <option key={i}>{g}</option>
               ))}
             </select>
           </div>
-          <div class="form-control w-full ">
-            <label class="label">
-              <span class="label-text">Select Device</span>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Select Device</span>
             </label>
             <select
-              class="select select-bordered"
+              className="select select-bordered"
               {...register("device", { required: true })}
             >
               <option disabled>Pick one</option>
-              {device.map((d) => (
-                <option>{d}</option>
+              {device.map((d, i) => (
+                <option key={i}>{d}</option>
               ))}
             </select>
           </div>

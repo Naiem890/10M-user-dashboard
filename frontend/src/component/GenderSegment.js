@@ -1,13 +1,13 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 
-const GenderSegment = () => {
+const GenderSegment = ({ genderSegment }) => {
   const data = {
-    labels: ["Female", "Male"],
+    labels: genderSegment.map((g) => g._id),
     datasets: [
       {
         label: "Gender",
-        data: [1233, 1212],
+        data: genderSegment.map((g) => g.count),
         backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)"],
       },
     ],

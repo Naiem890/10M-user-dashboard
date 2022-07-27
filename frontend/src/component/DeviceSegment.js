@@ -1,30 +1,13 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-const DeviceSegment = () => {
-  const DeviceData = [
-    {
-      deviceType: "Desktop",
-      userCount: 346,
-    },
-    {
-      deviceType: "Tablet",
-      userCount: 456,
-    },
-    {
-      deviceType: "Phone",
-      userCount: 346,
-    },
-  ];
-
-  DeviceData.sort((a, b) => b.userCount - a.userCount);
-
+const DeviceSegment = ({ deviceSegment }) => {
   const data = {
-    labels: DeviceData.map((device) => device.deviceType),
+    labels: deviceSegment.map((device) => device._id),
     datasets: [
       {
         label: "User Count ",
-        data: DeviceData.map((device) => device.userCount),
+        data: deviceSegment.map((device) => device.count),
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
           "rgba(54, 162, 235, 0.5)",
