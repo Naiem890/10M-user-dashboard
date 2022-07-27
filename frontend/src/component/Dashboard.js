@@ -18,8 +18,7 @@ const Dashboard = () => {
       fetch("http://localhost:8080/report")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          return setReport(data);
+          return setReport(data[0]);
         });
     } catch (err) {
       console.error(err.message);
@@ -30,15 +29,15 @@ const Dashboard = () => {
     getReport();
   }, [isLoading]);
 
-  if (!report.gender) {
+  if (!report.country) {
     return <Loading></Loading>;
   }
 
   return (
     <div className="max-w-7xl mx-auto px-6 my-11">
       <div className="grid grid-cols-5 gap-10 items-center">
-        <div className="grid md:grid-cols-3 gap-4 col-span-4">
-          <ActiveUserCards></ActiveUserCards>
+        <div className="grid md:grid-cols-4 gap-4 col-span-4">
+          <ActiveUserCards active={report.active[0]}></ActiveUserCards>
         </div>
         <div className="col-span-1">
           <GenderSegment genderSegment={report.gender} />

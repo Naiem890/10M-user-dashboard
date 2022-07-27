@@ -1,8 +1,9 @@
 const { faker } = require("@faker-js/faker");
 const mongoose = require("mongoose");
-const User = require("./Model/userModel");
+const { User } = require("./Model/userModel");
+require("dotenv").config();
 
-let i = 1000;
+let i = 1000000;
 
 const deviceArray = ["Mobile", "Desktop", "Tablet"];
 const users = [];
@@ -14,7 +15,7 @@ while (i--) {
     country: faker.address.country(),
     gender: faker.name.gender(true),
     device: deviceArray[Math.floor(Math.random() * (3 - 0))],
-    lastActive: faker.date.recent(30),
+    lastActive: new Date(faker.date.recent(60)).toISOString().split("T")[0],
     totalActiveHour:
       Math.floor(Math.random() * (10000 - 0)) +
       Math.floor(Math.random() * (10000 - 0)),
@@ -34,7 +35,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", async function () {
   console.log("Connected successfully");
-  console.log(users);
+  // console.log(users);
   await User.insertMany(users, function (err, docs) {
     if (err) {
       return console.log(err);
