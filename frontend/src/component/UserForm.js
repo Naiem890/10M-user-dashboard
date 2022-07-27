@@ -209,7 +209,7 @@ const UserForm = ({ getReport }) => {
 
   const onSubmit = (user) => {
     console.log(user);
-    fetch("http://localhost:8080/user", {
+    fetch("https://user-dashboard-1.el.r.appspot.com/user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",

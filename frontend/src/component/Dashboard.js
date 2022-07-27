@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const getReport = async () => {
     try {
-      fetch("http://localhost:8080/report")
+      fetch("https://user-dashboard-1.el.r.appspot.com/report")
         .then((res) => res.json())
         .then((data) => {
           return setReport(data[0]);
