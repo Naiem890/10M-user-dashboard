@@ -1,3 +1,23 @@
+# Getting Started with This project
+
+```
+git clone https://github.com/Naiem890/10M-user-dashboard.git dashboard-project
+cd dashboard-project
+npm install //for installing server side dependency
+cd frontend
+npm install // for installing client side dependency
+cd .. //back to root
+npm run dev // for running both client and server side
+npm run server // for running server only
+npm run client // for running client only
+```
+
+This app is hosted in google app enginee
+[Live Client Link](https://peppy-generator-357622.el.r.appspot.com/) | [Live Server Link](https://user-dashboard-1.el.r.appspot.com/)
+
+## Project interface
+
+<img src="https://i.ibb.co/Q6Xbff3/screencapture-localhost-3000-2022-07-28-08-34-03.png" alt="screencapture-localhost-3000-2022-07-28-08-34-03" border="0">
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
