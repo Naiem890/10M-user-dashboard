@@ -24,7 +24,7 @@ while (i--) {
 }
 
 mongoose.connect(
-  "mongodb://dbuser:WEzw1PIIYT56Sfjo@cluster0-shard-00-00.dtoqy.mongodb.net:27017,cluster0-shard-00-01.dtoqy.mongodb.net:27017,cluster0-shard-00-02.dtoqy.mongodb.net:27017/?ssl=true&replicaSet=atlas-qvxysw-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "mongodb://dbuser:WEzw1PIIYT56Sfjo@ac-mlgslpm-shard-00-00.tokopnj.mongodb.net:27017,ac-mlgslpm-shard-00-01.tokopnj.mongodb.net:27017,ac-mlgslpm-shard-00-02.tokopnj.mongodb.net:27017/?ssl=true&replicaSet=atlas-10ktn3-shard-0&authSource=admin&retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

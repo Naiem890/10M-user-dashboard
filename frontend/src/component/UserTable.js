@@ -30,7 +30,7 @@ const UserTable = ({ users }) => {
                 <th>{user.country}</th>
                 <th>{user.gender}</th>
                 <th>{user.device}</th>
-                <th>{typeof user.lastActive}</th>
+                <th>{user.totalActiveHour}</th>
               </tr>
             ))}
           </tbody>

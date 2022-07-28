@@ -218,7 +218,10 @@ const UserForm = ({ getReport }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        getReport();
+        setTimeout(function () {
+          getReport();
+          toast.success("Data Updated Successfully");
+        }, 10000);
         toast.success("User Added Successfully");
         console.log("Success:", data);
       })
